@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 typedef struct card_s {
 	char suit;
@@ -22,22 +23,22 @@ card* create_Deck() {
 	while (i <= 53) {//so I can get 53 cards
 		temp = (card*)malloc(sizeof(card));//dynamically allocating memory
 		if (i <= 13) {//for clubs
-			temp->suit = 5;
+			temp->suit = 'c';
 			temp->face = c;
 			++c;
 		}
 		else if (i >= 14 && i <= 26) {//for spades
-			temp->suit = 6;
+			temp->suit = 's';
 			temp->face = s;
 			++s;
 		}
 		else if (i >= 27 && i <= 39) {//for hearts
-			temp->suit = 3;
+			temp->suit = 'h';
 			temp->face = h;
 			++h;
 		}
 		else  if (i >= 40 && i <= 52) {//for diamonds
-			temp->suit = 4;
+			temp->suit = 'd';
 			temp->face = d;
 			++d;
 		}
@@ -521,11 +522,7 @@ int main(void) {
 		temp = (card*)malloc(sizeof(card));//for adding the card
 		playerdeck = (card*)malloc(sizeof(card));//the players deck
 		computerdeck = (card*)malloc(sizeof(card));//the computers deck
-		print_deck(deck);//Printing out the created linked list
-		Pause_Game();
 		shuffle(deck, 53);
-		print_deck(deck);//Printing the shuffled linked list
-		Pause_Game();
 		deal_Cards(&deck, &playerdeck, &computerdeck);//dealing the cards to the players
 
 
@@ -550,18 +547,10 @@ int main(void) {
 		Pause_Game();
 
 
-
-		//Match and Delete for computer
-		printf("dealer's hand\n");
-		print_deck(computerdeck);
-		Pause_Game();
-
-
 		printf("Dealer's Hand Matched Pairs:\n");
 		match_card(&computerdeck);
 		computer = deck_size(computerdeck);//state the number of cards that the computer has after removing the pairs
 		printf("I have %d cards now\n", computer);
-		print_deck(computerdeck);
 		Pause_Game();
 
 
